@@ -8,21 +8,20 @@ Image acquisition to obtain original 16-bit grayscale TIFF images using the fluo
 ![Step1](https://github.com/user-attachments/assets/666c029b-48dd-489c-a25b-9fa807d7818b)
 
 ## Step 2: Identification of target proteins and AF
-Put the raw grayscale images into six image processing pipelines, respectively. 
+Place the raw grayscale images into six separate image processing pipelines. 
+![Figure-pip-1-2](https://github.com/user-attachments/assets/db327b43-e01b-4858-bced-2ffef8c4b4d1)
 
-Use “GrayToColor” modules to transfer invisible 16-bit grayscale images to visible RGB images.
+Use “IdentifyPrimaryObjects” modules with advanced settings to identify objects of AF, cell nuclei, epithelial/tumor cells, COX-2, PTGER4, and PIK3CA
+![Figure-pip-4](https://github.com/user-attachments/assets/410f0b86-eba5-499c-ae20-edeeb0bfe9ac)
+![Step2Sample](https://github.com/user-attachments/assets/4f6b2f15-310d-4b85-883d-8f53eeff29a5)
 
-Use “IdentifyPrimaryObjects” modules with advanced settings to identify objects of AF, cell nuclei, epithelial/tumor cells, COX-2, PGE2-EP4, and PIK3CA
+Use "FilterObjects” modules to remove the small objects (noise) less than 40 pixels (in area value) for three biomarker images and objects less than 20 pixels (in area value) for DAPI and Pan CK images.
+![Figure-pip-5-6](https://github.com/user-attachments/assets/5ffecbef-d72e-4dc8-8ec4-1a90c0a49945)
 
-## Step 3: Remove the small objects (noise)
-Use “MeasureObjectsSizeShape” modules to measure the area and shape features of identified AF, nuclei, tumor cells, and positive biomarker objects.
+Use "SaveImages" module to save identified objects' images.
+![Figure-pip-10](https://github.com/user-attachments/assets/98e9ab75-ceff-45ec-97a2-0ac65472ff81)
 
-Use “FilterObjects” modules to remove the small objects (noise) less than 40 pixels (in area value) for three biomarker images and objects less than 20 pixels (in area value) for DAPI and Pan CK images.
-
-The white arrows indicate the small areas removed. Export visible “ObjectsIdentified images” (16-bit RGB TIFF format) in the designated folders for visual quality check.
-
-For the poor-quality images with strong background noise, alternative pipelines with adjusted threshold settings were used for a second or third run to correctly differentiate true signals from background noise. 
-
+## Step 3: 
 ## Step 4: Eliminated AF objects
 Input the six “ObjectsIdentified” images into an image measurement pipeline for continued image processing.
 
