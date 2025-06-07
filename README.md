@@ -24,21 +24,35 @@ Use "SaveImages" module to save identified objects' images.
 PIK3CA images were loaded into a pipeline in which the “IdentifyPrimaryObjects” module was set with a lower threshold value to identify total tissues.
 ![Figure-pip-Step3-TotalTissue](https://github.com/user-attachments/assets/a4f9c396-2af6-499c-84e9-7e9975887567)
 
-## Step 4: Eliminated AF objects and automated quantification of three biomakers
+## Step 4: Eliminate AF objects and automate quantification of three biomarkers
+### Eliminate AF objects
 Input the six “ObjectsIdentified” images into an image measurement pipeline for continued image processing. 
 ![Figure-AF-remove](https://github.com/user-attachments/assets/df89189a-a569-4b0d-9cc9-ca25059ac3fc)
 
 Use “ConvertImageToObjects” module to convert loaded visible images to calculable objects. 
 ![Figure-AF-remove-2](https://github.com/user-attachments/assets/597dfa60-6dcf-47ca-924b-137caa906baf)
 
-Use “ExpandObjects” module to expand AF objects for 3 pixels for fully removing tissue foldings. 
+Use “ExpandObjects” module to expand AF objects by 3 pixels to fully remove tissue foldings. 
 ![Figure-AF-remove-3](https://github.com/user-attachments/assets/0971c435-bc2a-4932-87b3-85ab5247ea2c)
 
 Use “MaskObjects” modules to remove AF objects, tissue folding, and edge effects by overlaying AF images with other fluorophore images to obtain five AF-free images for each sample. 
 ![Figure-AF-remove-4](https://github.com/user-attachments/assets/d997f6cf-e2bb-4712-bba0-ab3393dc7e89)
 
+### Automate quantification of three biomarkers
+Use “RelateObjects” modules to exclude objects not associated with cell nuclei in biomarker images, defining these objects as nonspecific fluorescent signals.
+![Figure-AF-Qua-1](https://github.com/user-attachments/assets/66c230cc-1c84-4ae6-862c-8ce58b943d9f)
 
+The “IdentifySecondaryObjects” module was used to fill the small cytoplasmic holes in the glandular structure of adenomas to define epithelial area more precisely. 
+![Figure-AF-Qua-2](https://github.com/user-attachments/assets/38fa5429-1cbe-4f00-b730-1a94c8c619ca)
 
+Use “MaskObjects” modules to identify positive biomarker objects in tumor cells and stromal areas, respectively. It also obtained stromal objects by removing overlapping Pan CK-positive objects from the “IdentifiedTotalTissueObjects” images.
+![Figure-AF-Qua-3](https://github.com/user-attachments/assets/efc93179-c7b6-42b5-861a-139037e2c7ff)
 
+Use the “ConvertObjectsToImage” modules to convert identified objects into images for further measurement, and the “MeasureImageAreaOccupied” modules measure the areas occupied by identified objects.
+![Figure-AF-Qua-4](https://github.com/user-attachments/assets/09288ac1-78f9-4208-b57f-66fa727a5598)
 
+A set of “CalculateMath” modules automatically calculated the positive percentage of tumor cells, stromal cells, and total positive percentage for each biomarker.
+![Figure-AF-Qua-5](https://github.com/user-attachments/assets/8c810afc-a3c6-4489-bd73-db1b8c32f048)
 
+The quantitative data from each image was exported using the “ExportToSpreadsheet” module into a .csv file
+![Figure-AF-Qua-6](https://github.com/user-attachments/assets/c05b72ba-2bd4-4e90-91fe-8b8ce3ea2fb9)
