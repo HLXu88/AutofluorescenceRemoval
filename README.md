@@ -25,10 +25,20 @@ PIK3CA images were loaded into a pipeline in which the “IdentifyPrimaryObjects
 ![Figure-pip-Step3-TotalTissue](https://github.com/user-attachments/assets/a4f9c396-2af6-499c-84e9-7e9975887567)
 
 ## Step 4: Eliminated AF objects and automated quantification of three biomakers
-Input the six “ObjectsIdentified” images into an image measurement pipeline for continued image processing.
+Input the six “ObjectsIdentified” images into an image measurement pipeline for continued image processing. 
+![Figure-AF-remove](https://github.com/user-attachments/assets/df89189a-a569-4b0d-9cc9-ca25059ac3fc)
 
-Use “ConvertImageToObjects” module to convert loaded visible images to calculable objects.
+Use “ConvertImageToObjects” module to convert loaded visible images to calculable objects. 
+![Figure-AF-remove-2](https://github.com/user-attachments/assets/597dfa60-6dcf-47ca-924b-137caa906baf)
 
-Use “ExpandObjects” module to expand AF objects for 3 pixels for fully removing tissue foldings.
+Use “ExpandObjects” module to expand AF objects for 3 pixels for fully removing tissue foldings. 
+![Figure-AF-remove-3](https://github.com/user-attachments/assets/0971c435-bc2a-4932-87b3-85ab5247ea2c)
 
-Use “MaskObjects” modules to remove AF objects, tissue folding, and edge effects by overlaying AF images with other fluorophore images to obtain five AF-free images for each sample. The white arrows indicate the eliminated AF objects. 
+Use “MaskObjects” modules to remove AF objects, tissue folding, and edge effects by overlaying AF images with other fluorophore images to obtain five AF-free images for each sample. 
+![Figure-AF-remove-4](https://github.com/user-attachments/assets/d997f6cf-e2bb-4712-bba0-ab3393dc7e89)
+
+
+
+
+
+
