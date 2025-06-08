@@ -1,27 +1,27 @@
 # Automated High-Throughput Quantification
 This repository is for referring autofluorescence removal pipelines
 
-Multiplex immunohistochemistry (mIHC) technologies enable the detection of multiple markers on a single tissue section, providing valuable quantitative data for understanding disease heterogeneity and molecular profiling. Various mIHC techniques, including chromogenic mIHC, TSA-based fluorescence mIHC, metal-based mIHC, cyclic mIHC/IF, and DNA barcoding-based mIHC, have been developed, each with its own advantages and limitations. To address this issue, we investigated an enhanced open-source method using digital processing to eliminate AF. By providing a robust and automated solution for AF elimination, this method enhances the precision of mIHC analysis and facilitates large-scale studies, ultimately contributing to a deeper understanding of disease mechanisms and the development of targeted therapies.
+Multiplex immunohistochemistry (mIHC) technologies enable the detection of multiple markers on a single tissue section, providing valuable quantitative data for understanding disease heterogeneity and molecular profiling. Various mIHC techniques, including chromogenic mIHC, TSA-based fluorescence mIHC, metal-based mIHC, cyclic mIHC/IF, and DNA barcoding-based mIHC, have been developed, each with its advantages and limitations. To address this issue, we investigated an enhanced open-source method using digital processing to eliminate AF. By providing a robust and automated solution for AF elimination, this method enhances the precision of mIHC analysis and facilitates large-scale studies, ultimately contributing to a deeper understanding of disease mechanisms and the development of targeted therapies.
 
 ## Step 1: Overlay Three Biomarkers
-Image acquisition to obtain original 16-bit grayscale TIFF images using the fluorescent microscope. Use <span style="color: red">GrayToColor</span> modules to transfer invisible 16-bit grayscale images to visible RGB images
+Image acquisition to obtain original 16-bit grayscale TIFF images using the fluorescent microscope. Use ![GrayToColor](https://img.shields.io/badge/GrayToColor-red) modules to transfer invisible 16-bit grayscale images to visible RGB images
 ![Step1](https://github.com/user-attachments/assets/876eca65-b4e8-41d7-b03d-5bfb82a76c0b)
 
 ## Step 2: Identification of target proteins and AF
 Place the raw grayscale images into six separate image processing pipelines. 
 ![Figure-pip-1-2](https://github.com/user-attachments/assets/db327b43-e01b-4858-bced-2ffef8c4b4d1)
 
-Use “IdentifyPrimaryObjects” modules with advanced settings to identify objects of AF, cell nuclei, epithelial/tumor cells, COX-2, PTGER4, and PIK3CA
+Use ![IdentifyPrimaryObjects](https://img.shields.io/badge/IdentifyPrimaryObjects-red) modules with advanced settings to identify objects of AF, cell nuclei, epithelial/tumor cells, COX-2, PTGER4, and PIK3CA
 ![Figure-pip-4](https://github.com/user-attachments/assets/7ecde452-05f9-4edd-aa44-439e55fab7fc)
 
-Use "FilterObjects” modules to remove the small objects (noise) less than 40 pixels (in area value) for three biomarker images and objects less than 20 pixels (in area value) for DAPI and Pan CK images.
+Use ![FilterObjects](https://img.shields.io/badge/FilterObjects-red) modules to remove the small objects (noise) less than 40 pixels (in area value) for three biomarker images and objects less than 20 pixels (in area value) for DAPI and Pan CK images.
 ![Figure-pip-5-6](https://github.com/user-attachments/assets/5ffecbef-d72e-4dc8-8ec4-1a90c0a49945)
 
-Use "SaveImages" module to save identified objects' images.
+Use ![SaveImages](https://img.shields.io/badge/SaveImages-red) module to save identified objects' images.
 ![Figure-pip-10](https://github.com/user-attachments/assets/98e9ab75-ceff-45ec-97a2-0ac65472ff81)
 
 ## Step 3: Identify Total Tissue
-PIK3CA images were loaded into a pipeline in which the “IdentifyPrimaryObjects” module was set with a lower threshold value to identify total tissues.
+PIK3CA images were loaded into a pipeline in which the ![IdentifyPrimaryObjects](https://img.shields.io/badge/IdentifyPrimaryObjects-red) module was set with a lower threshold value to identify total tissues.
 ![Figure-pip-Step3-TotalTissue](https://github.com/user-attachments/assets/a4f9c396-2af6-499c-84e9-7e9975887567)
 
 ## Step 4: Eliminate AF objects and automate quantification of three biomarkers
@@ -29,30 +29,30 @@ PIK3CA images were loaded into a pipeline in which the “IdentifyPrimaryObjects
 Input the six “ObjectsIdentified” images into an image measurement pipeline for continued image processing. 
 ![Figure-AF-remove](https://github.com/user-attachments/assets/df89189a-a569-4b0d-9cc9-ca25059ac3fc)
 
-Use “ConvertImageToObjects” module to convert loaded visible images to calculable objects. 
+Use ![ConvertImageToObjects](https://img.shields.io/badge/ConvertImageToObjects-red) module to convert loaded visible images to calculable objects. 
 ![Figure-AF-remove-2](https://github.com/user-attachments/assets/597dfa60-6dcf-47ca-924b-137caa906baf)
 
-Use “ExpandObjects” module to expand AF objects by 3 pixels to fully remove tissue foldings. 
+Use ![ExpandObjects](https://img.shields.io/badge/ExpandObjects-red) module to expand AF objects by 3 pixels to fully remove tissue foldings. 
 ![Figure-AF-remove-3](https://github.com/user-attachments/assets/0971c435-bc2a-4932-87b3-85ab5247ea2c)
 
-Use “MaskObjects” modules to remove AF objects, tissue folding, and edge effects by overlaying AF images with other fluorophore images to obtain five AF-free images for each sample. 
+Use ![MaskObjects](https://img.shields.io/badge/MaskObjects-red) modules to remove AF objects, tissue folding, and edge effects by overlaying AF images with other fluorophore images to obtain five AF-free images for each sample. 
 ![Figure-AF-remove-4](https://github.com/user-attachments/assets/d997f6cf-e2bb-4712-bba0-ab3393dc7e89)
 
 ### Automate quantification of three biomarkers
-Use “RelateObjects” modules to exclude objects not associated with cell nuclei in biomarker images, defining these objects as nonspecific fluorescent signals.
+Use ![RelateObjects](https://img.shields.io/badge/RelateObjects-red) modules to exclude objects not associated with cell nuclei in biomarker images, defining these objects as nonspecific fluorescent signals.
 ![Figure-AF-Qua-1](https://github.com/user-attachments/assets/66c230cc-1c84-4ae6-862c-8ce58b943d9f)
 
-The “IdentifySecondaryObjects” module was used to fill the small cytoplasmic holes in the glandular structure of adenomas to define epithelial area more precisely. 
+The ![IdentifySecondaryObjects](https://img.shields.io/badge/IdentifySecondaryObjects-red) module was used to fill the small cytoplasmic holes in the glandular structure of adenomas to define epithelial area more precisely. 
 ![Figure-AF-Qua-2](https://github.com/user-attachments/assets/38fa5429-1cbe-4f00-b730-1a94c8c619ca)
 
-Use “MaskObjects” modules to identify positive biomarker objects in tumor cells and stromal areas, respectively. It also obtained stromal objects by removing overlapping Pan CK-positive objects from the “IdentifiedTotalTissueObjects” images.
+Use ![MaskObjects](https://img.shields.io/badge/MaskObjects-red) modules to identify positive biomarker objects in tumor cells and stromal areas, respectively. It also obtained stromal objects by removing overlapping Pan CK-positive objects from the “IdentifiedTotalTissueObjects” images.
 ![Figure-AF-Qua-3](https://github.com/user-attachments/assets/efc93179-c7b6-42b5-861a-139037e2c7ff)
 
-Use the “ConvertObjectsToImage” modules to convert identified objects into images for further measurement, and the “MeasureImageAreaOccupied” modules measure the areas occupied by identified objects.
+Use ![ConvertObjectsToImage](https://img.shields.io/badge/ConvertObjectsToImage-red) modules to convert identified objects into images for further measurement, and the “MeasureImageAreaOccupied” modules measure the areas occupied by identified objects.
 ![Figure-AF-Qua-4](https://github.com/user-attachments/assets/09288ac1-78f9-4208-b57f-66fa727a5598)
 
-A set of “CalculateMath” modules automatically calculated the positive percentage of tumor cells, stromal cells, and total positive percentage for each biomarker.
+A set of ![CalculateMath](https://img.shields.io/badge/CalculateMath-red) modules automatically calculated the positive percentage of tumor cells, stromal cells, and total positive percentage for each biomarker.
 ![Figure-AF-Qua-5](https://github.com/user-attachments/assets/8c810afc-a3c6-4489-bd73-db1b8c32f048)
 
-The quantitative data from each image was exported using the “ExportToSpreadsheet” module into a .csv file
+The quantitative data from each image was exported using the ![ExportToSpreadsheet](https://img.shields.io/badge/ExportToSpreadsheet-red) module into a .csv file
 ![Figure-AF-Qua-6](https://github.com/user-attachments/assets/c05b72ba-2bd4-4e90-91fe-8b8ce3ea2fb9)
