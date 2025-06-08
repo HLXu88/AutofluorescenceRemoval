@@ -4,7 +4,7 @@ This repository is for referring autofluorescence removal pipelines
 Multiplex immunohistochemistry (mIHC) technologies enable the detection of multiple markers on a single tissue section, providing valuable quantitative data for understanding disease heterogeneity and molecular profiling. Various mIHC techniques, including chromogenic mIHC, TSA-based fluorescence mIHC, metal-based mIHC, cyclic mIHC/IF, and DNA barcoding-based mIHC, have been developed, each with its own advantages and limitations. To address this issue, we investigated an enhanced open-source method using digital processing to eliminate AF. By providing a robust and automated solution for AF elimination, this method enhances the precision of mIHC analysis and facilitates large-scale studies, ultimately contributing to a deeper understanding of disease mechanisms and the development of targeted therapies.
 
 ## Step 1: Overlay Three Biomarkers
-Image acquisition to obtain original 16-bit grayscale TIFF images using the fluorescent microscope. Use “GrayToColor” modules to transfer invisible 16-bit grayscale images to visible RGB images
+Image acquisition to obtain original 16-bit grayscale TIFF images using the fluorescent microscope. Use <span style="color: red">GrayToColor</span> modules to transfer invisible 16-bit grayscale images to visible RGB images
 ![Step1](https://github.com/user-attachments/assets/876eca65-b4e8-41d7-b03d-5bfb82a76c0b)
 
 ## Step 2: Identification of target proteins and AF
